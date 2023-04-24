@@ -1,0 +1,78 @@
+{% include 'common/header.html' %}
+    <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mb-4">
+            <h2>商品详情</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <img src="https://via.placeholder.com/500x500" class="img-fluid" alt="...">
+          </div>
+          <div class="col-md-6">
+            <h3 class="mb-3">商品名称</h3>
+            <p><strong>分类：</strong>分类1</p>
+            <p><strong>原价：</strong><del>￥120</del></p>
+            <p><strong>现价：</strong>￥100</p>
+            <p><strong>折扣：</strong>20%</p>
+            <p><strong>评分：</strong>4.5</p>
+            <p><strong>评价数：</strong>100</p>
+            <hr>
+            <h4 class="mb-3">商品详情</h4>
+            <p>这里是商品的详细描述。</p>
+            <p>这里是商品的详细描述。</p>
+            <p>这里是商品的详细描述。</p>
+            <a href="/order/cart" class="btn btn-primary mt-3">加入购物车</a>
+          </div>
+        </div>        
+        <div class="row mt-5">
+          <div class="col-md-12">
+            <h4 class="mb-3">商品详情图</h4>
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <img src="https://via.placeholder.com/300x300" class="img-fluid" alt="...">
+              </div>
+              <div class="col-md-3 mb-3">
+                <img src="https://via.placeholder.com/300x300" class="img-fluid" alt="...">
+              </div>
+              <div class="col-md-3 mb-3">
+                <img src="https://via.placeholder.com/300x300" class="img-fluid" alt="...">
+              </div>
+              <div class="col-md-3 mb-3">
+                <img src="https://via.placeholder.com/300x300" class="img-fluid" alt="...">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-12">
+              <h4 class="mb-3">商品评论</h4>
+              <div class="card mb-3">
+                <div class="card-body">
+                  <h5 class="card-title">用户1</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">2022-01-01</h6>
+                  <p class="card-text">这是一条评论。</p>
+                </div>
+              </div>
+              <div class="card mb-3">
+                <div class="card-body">
+                  <h5 class="card-title">用户2</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">2022-01-02</h6>
+                  <p class="card-text">这是另一条评论。</p>
+                </div>
+              </div>
+              <div class="card mb-3">
+                <div class="card-body">
+                  <h5 class="card-title">用户2</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">2022-01-02</h6>
+                  <p class="card-text">这是另一条评论。</p>
+                </div>
+              </div>
+              <!-- 添加更多评论卡片 -->
+            </div>
+          </div>
+          {% include 'common/footer.html' %}
+      </div>
+      
+</body>
+</html>
