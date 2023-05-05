@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-r0v-^buha)tr05h_x&3b6_))a3bex!x_@++j(zx!tt8rdv5xeb
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['https://aprilpicnic-bronzefilm-8000.codio-box.uk']
 
 # Application definition
 
