@@ -15,6 +15,7 @@
                             <th scope="col">Zipcode</th>
                             <th scope="col">Created At</th>
                             <th scope="col">Identity</th>
+                            <th scope="col">Operation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,7 +30,19 @@
                             <td class="{% if user.is_admin %}text-success{% else %}text-primary{% endif %}">
                                 {% if user.is_admin %}Administrators{% else %}General users{% endif %}
                             </td>
-                              
+                            <td>
+                                {% if user.name != "admin" %}
+                                    {% if user.is_admin == 0 %}
+                                    <a href="{% url 'set_admin' user.id %}" class="btn btn-primary">
+                                    Set as Admin
+                                    </a>
+                                    {% else %}
+                                    <a href="{% url 'set_general' user.id %}" class="btn btn-success">
+                                        Set as General
+                                    </a>
+                                    {% endif %}
+                                {% endif %}    
+                            </td>  
                         </tr>
                         {% endfor %}
                     </tbody>

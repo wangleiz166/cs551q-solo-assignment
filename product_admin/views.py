@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from order.models import Order
 from product_csv.models import Product
 from user.models import User
@@ -6,6 +6,26 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import plotly.graph_objs as go
 from plotly.offline import plot
 
+
+def set_general(request, user_id):
+    if not is_admin(request):
+        return render(request, 'not_admin.html')
+
+    user = User.objects.get(id=user_id)
+    user.is_admin = False
+    user.save()
+
+    return redirect('userList')
+
+def set_admin(request, user_id):
+    if not is_admin(request):
+        return render(request, 'not_admin.html')
+
+    user = User.objects.get(id=user_id)
+    user.is_admin = True
+    user.save()
+
+    return redirect('userList')
 
 def is_admin(request):
     user_id = request.COOKIES.get('userid', None)
@@ -26,17 +46,17 @@ def list(request):
     
     order_list = Order.objects.all().order_by('id')
     # Pagination    
-    paginator = Paginator(order_list, 10)  # 每页显示10个商品
-    page = request.GET.get('page') or 1  # 如果请求的页码未设置或为空字符串，设置为1
+    paginator = Paginator(order_list, 10)  
+    page = request.GET.get('page') or 1 
 
 
     try:
         orders = paginator.page(page)
     except PageNotAnInteger:
-        # 如果请求的页码不是整数，则显示第一页
+        # If the requested page number is not an integer, then the first page is displayed
         orders = paginator.page(1)
     except EmptyPage:
-        # 如果请求的页码超出范围，则显示最后一页
+        # If the requested page number is out of range, the last page will be displayed
         orders = paginator.page(paginator.num_pages)
 
     
@@ -49,17 +69,15 @@ def userList(request):
         return render(request, 'not_admin.html')
     user_list = User.objects.all().order_by('id')
     # Pagination    
-    paginator = Paginator(user_list, 10)  # 每页显示10个商品
-    page = request.GET.get('page') or 1  # 如果请求的页码未设置或为空字符串，设置为1
+    paginator = Paginator(user_list, 10)  # 10 items per page
+    page = request.GET.get('page') or 1  # If the requested page number is not set or is an empty string, set to 1
 
 
     try:
         users = paginator.page(page)
     except PageNotAnInteger:
-        # 如果请求的页码不是整数，则显示第一页
         users = paginator.page(1)
     except EmptyPage:
-        # 如果请求的页码超出范围，则显示最后一页
         users = paginator.page(paginator.num_pages)
 
     
