@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'product',
     'user',
     'order',
+    'product_admin',
+    'behave_django'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +129,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+TEST_RUNNER = 'behave_django.runner.BehaviorDrivenTestRunner'
+

@@ -1,0 +1,46 @@
+{% include 'common/header.html' %}
+
+<style>
+
+    .auth-form {
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        padding: 30px;
+        width: 400px;
+    }
+
+    .auth-form h2 {
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .auth-form p {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .back-btn {
+        margin-top: 10px;
+        text-align: center;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="auth-form">
+                <h2 style="color:black">Registration successful</h2>
+                <p style="color:black">Congratulations, you have successfully registered!！</p>
+                <div class="back-btn">
+                    <a href="/" style="color:black">Back to main page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'common/footer.html' %}

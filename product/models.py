@@ -5,7 +5,7 @@ from product_csv.models import Product as CsvProduct
 #     id INTEGER PRIMARY KEY,
 #     user_id INTEGER NOT NULL,
 #     order_id INTEGER NOT NULL,
-#     payment_method VARCHAR(50) NOT NULL,
+#     payment_method VARCHAR(50) NOT NULL,Q
 #     payment_amount DECIMAL(8, 2) NOT NULL,
 #     payment_time DATETIME NOT NULL
 # );

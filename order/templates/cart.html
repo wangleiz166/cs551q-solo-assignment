@@ -1,9 +1,8 @@
 {% include 'common/header.html' %}
-
 <div class="container mt-5">
   <div class="row">
     <div class="col-12 text-center">
-      <h2>购物车</h2>
+      <h2>Shopping Cart</h2>
     </div>
   </div>
   <div class="row mt-4">
@@ -12,49 +11,37 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">商品名称</th>
-            <th scope="col">单价</th>
-            <th scope="col">数量</th>
-            <th scope="col">小计</th>
-            <th scope="col">操作</th>
+            <th scope="col">Product name</th>
+            <th scope="col">Unit price</th>
+            <th scope="col">Number</th>
+            <th scope="col">Operation</th>
           </tr>
         </thead>
         <tbody>
+          {% for item in cart_items %}
           <tr>
-            <th scope="row">1</th>
-            <td>商品1</td>
-            <td>￥100</td>
-            <td>1</td>
-            <td>￥100</td>
-            <td><a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash">delete</i></a></td>
+            <th scope="row">{{ item.id }}</th>
+            <td>{{ item.product_name|truncatechars:40 }}</td>
+            <td>{{ item.product_price }}</td>
+            <td>{{ item.product_quantity }}</td>
+            <td><a href="/order/remove_cart/{{item.id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash">delete</i></a></td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>商品2</td>
-            <td>￥200</td>
-            <td>2</td>
-            <td>￥400</td>
-            <td><a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash">delete</i></a></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>商品3</td>
-            <td>￥300</td>
-            <td>3</td>
-            <td>￥900</td>
-            <td><a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash">delete</i></a></td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
   </div>
   <div class="row mt-4">
     <div class="col-md-12 d-flex justify-content-center align-items-center">
-      <h4 class="mr-3 mb-0">总价：￥1400</h4>&nbsp;&nbsp;&nbsp;
-      <a href="/order" class="btn btn-primary">结算</a>
+      <h4 class="mr-3 mb-0">Total Price: ₹{{total_price}}</h4>&nbsp;&nbsp;&nbsp;
+      <form action="/order/checkout/" method="POST">
+        {% csrf_token %}
+        {% if cart_items %}
+        <button type="submit" class="btn btn-primary">checkout</button>
+        {% endif %}
+      </form>
     </div>
   </div>
-    
 </div>
 
 {% include 'common/footer.html' %}

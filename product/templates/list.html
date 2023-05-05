@@ -1,149 +1,72 @@
 {% include 'common/header.html' %}
 <div class="container">
     <div class="row">
-      <div class="col-12 text-center mb-4">
-        <h2>商品列表</h2>
-      </div>
+        <div class="col-12 text-center mb-4">
+            <h2>Product List</h2>
+        </div>
     </div>
+    
+    <!-- Shopping Categories -->
+    <div class="row">
+        <div class="col-12">
+            <h4 style="color:white">Classification</h4>
+            <select class="form-select mb-4" id="category-dropdown" onchange="location = this.value;">
+                <option value="" {% if not category_query %}selected{% endif %}>Please select a category</option>
+                {% for category in categories %}
+                    <option value="?{% if search_query %}search_query={{ search_query|urlencode }}&{% endif %}category={{ category.category|urlencode }}" {% if category_query == category.category %}selected{% endif %}>{{ category.category }} ({{ category.count }})</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
-      <a href="/detail/1">
-    <div class="col">
-        <div class="card p-2 hover-click">
-            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
-            <div class="card-body">
-                <h5 class="card-title" style="color: #333;">商品1</h5>
-                <p class="card-text mb-1"><strong>现价：</strong>￥100</p>
-                <p class="card-text mb-1"><strong>折扣：</strong>20%</p>
-                <p class="card-text mb-1"><strong>评分：</strong>4.5</p>
-                <p class="card-text mb-1"><strong>评价数：</strong>100</p>
+        {% for product in products %}
+            <div class="col mb-4">
+                <a href="/detail/{{ product.product_id }}">
+                    <div class="card p-2 hover-click">
+                        <img src="{{ product.img_link }}" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title" style="color: #333;">{{ product.name|truncatechars:40 }}</h5>
+                            <p class="card-text mb-1"><strong>Current price:</strong>{{ product.price }}</p>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
-    </div>
-</a>
-
-      <a href="/detail/1">
-    <div class="col">
-        <div class="card p-2 hover-click">
-            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
-            <div class="card-body">
-                <h5 class="card-title" style="color: #333;">商品1</h5>
-                <p class="card-text mb-1"><strong>现价：</strong>￥100</p>
-                <p class="card-text mb-1"><strong>折扣：</strong>20%</p>
-                <p class="card-text mb-1"><strong>评分：</strong>4.5</p>
-                <p class="card-text mb-1"><strong>评价数：</strong>100</p>
-            </div>
-        </div>
-    </div>
-</a>
-
-      <a href="/detail/1">
-    <div class="col">
-        <div class="card p-2 hover-click">
-            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
-            <div class="card-body">
-                <h5 class="card-title" style="color: #333;">商品1</h5>
-                <p class="card-text mb-1"><strong>现价：</strong>￥100</p>
-                <p class="card-text mb-1"><strong>折扣：</strong>20%</p>
-                <p class="card-text mb-1"><strong>评分：</strong>4.5</p>
-                <p class="card-text mb-1"><strong>评价数：</strong>100</p>
-            </div>
-        </div>
-    </div>
-</a>
-
-      <a href="/detail/1">
-    <div class="col">
-        <div class="card p-2 hover-click">
-            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
-            <div class="card-body">
-                <h5 class="card-title" style="color: #333;">商品1</h5>
-                <p class="card-text mb-1"><strong>现价：</strong>￥100</p>
-                <p class="card-text mb-1"><strong>折扣：</strong>20%</p>
-                <p class="card-text mb-1"><strong>评分：</strong>4.5</p>
-                <p class="card-text mb-1"><strong>评价数：</strong>100</p>
-            </div>
-        </div>
-    </div>
-</a>
-
-      <a href="/detail/1">
-    <div class="col">
-        <div class="card p-2 hover-click">
-            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
-            <div class="card-body">
-                <h5 class="card-title" style="color: #333;">商品1</h5>
-                <p class="card-text mb-1"><strong>现价：</strong>￥100</p>
-                <p class="card-text mb-1"><strong>折扣：</strong>20%</p>
-                <p class="card-text mb-1"><strong>评分：</strong>4.5</p>
-                <p class="card-text mb-1"><strong>评价数：</strong>100</p>
-            </div>
-        </div>
-    </div>
-</a>
-
-      <a href="/detail/1">
-    <div class="col">
-        <div class="card p-2 hover-click">
-            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
-            <div class="card-body">
-                <h5 class="card-title" style="color: #333;">商品1</h5>
-                <p class="card-text mb-1"><strong>现价：</strong>￥100</p>
-                <p class="card-text mb-1"><strong>折扣：</strong>20%</p>
-                <p class="card-text mb-1"><strong>评分：</strong>4.5</p>
-                <p class="card-text mb-1"><strong>评价数：</strong>100</p>
-            </div>
-        </div>
-    </div>
-</a>
-
-      <a href="/detail/1">
-    <div class="col">
-        <div class="card p-2 hover-click">
-            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
-            <div class="card-body">
-                <h5 class="card-title" style="color: #333;">商品1</h5>
-                <p class="card-text mb-1"><strong>现价：</strong>￥100</p>
-                <p class="card-text mb-1"><strong>折扣：</strong>20%</p>
-                <p class="card-text mb-1"><strong>评分：</strong>4.5</p>
-                <p class="card-text mb-1"><strong>评价数：</strong>100</p>
-            </div>
-        </div>
-    </div>
-</a>
-
-      <a href="/detail/1">
-    <div class="col">
-        <div class="card p-2 hover-click">
-            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
-            <div class="card-body">
-                <h5 class="card-title" style="color: #333;">商品1</h5>
-                <p class="card-text mb-1"><strong>现价：</strong>￥100</p>
-                <p class="card-text mb-1"><strong>折扣：</strong>20%</p>
-                <p class="card-text mb-1"><strong>评分：</strong>4.5</p>
-                <p class="card-text mb-1"><strong>评价数：</strong>100</p>
-            </div>
-        </div>
-    </div>
-</a>
-
+        {% endfor %}
     </div>
     <br>
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
-          </li>
-          <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">1</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">下一页</a>
-          </li>
+            <li class="page-item {% if not products.has_previous %}disabled{% endif %}">
+                <a class="page-link" href="?{% if search_query %}search_query={{ search_query|urlencode }}&{% endif %}{% if category_query %}category={{ category_query|urlencode }}&{% endif %}page=1">首页</a>
+            </li>
+            <li class="page-item {% if not products.has_previous %}disabled{% endif %}">
+                {% if products.has_previous %}
+                    <a class="page-link" href="?{% if search_query %}search_query={{ search_query|urlencode }}&{% endif %}{% if category_query %}category={{ category_query|urlencode }}&{% endif %}page={{ products.previous_page_number }}">上一页</a>
+                {% else %}
+                    <a class="page-link" href="?{% if search_query %}search_query={{ search_query|urlencode }}&{% endif %}{% if category_query %}category={{ category_query|urlencode }}&{% endif %}page=1">上一页</a>
+                {% endif %}
+            </li>
+            {% with num_pages=products.paginator.num_pages current_page=products.number %}
+            {% for i in products.paginator.page_range %}
+                {% if i|add:-2 <= current_page and i|add:2 >= current_page %}
+                    <li class="page-item {% if products.number == i %}active{% endif %}">
+                        <a class="page-link" href="?{% if search_query %}search_query={{ search_query|urlencode }}&{% endif %}{% if category_query %}category={{ category_query|urlencode }}&{% endif %}page={{ i }}">{{ i }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% endwith %}
+            <li class="page-item {% if not products.has_next %}disabled{% endif %}">
+                <a class="page-link" href="?{% if search_query %}search_query={{ search_query|urlencode }}&{% endif %}{% if category_query %}category={{ category_query|urlencode }}&{% endif %}page={{ products.paginator.num_pages }}">下一页</a>
+            </li>
+            <li class="page-item {% if not products.has_next %}disabled{% endif %}">
+                <a class="page-link" href="?{% if search_query %}search_query={{ search_query|urlencode }}&{% endif %}{% if category_query %}category={{ category_query|urlencode }}&{% endif %}page={{ products.paginator.num_pages }}">尾页</a>
+            </li>
         </ul>
-      </nav>
-      {% include 'common/footer.html' %}
-  </div>
+    </nav>    
+
+</div>
+{% include 'common/footer.html' %}
 </body>
 </html>

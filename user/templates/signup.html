@@ -1,36 +1,79 @@
 {% include 'common/header.html' %}
+<style>
+
+    .auth-form {
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        padding: 30px;
+        width: 400px;
+    }
+    
+    .auth-form h2 {
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    .auth-form label {
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    
+    .auth-form input[type="text"],
+    .auth-form input[type="password"],
+    .auth-form input[type="email"] {
+        border-radius: 2px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .auth-form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+    
+    .back-btn {
+        margin-top: 10px;
+        text-align: center;
+    }
+</style>
 
 <div class="container mt-5">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="mb-0">注册</h4>
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="form-group">
-              <label for="username">用户名</label>
-              <input type="text" class="form-control" id="username" name="username">
-            </div>
-            <div class="form-group">
-              <label for="email">电子邮件</label>
-              <input type="email" class="form-control" id="email" name="email">
-            </div>
-            <div class="form-group">
-              <label for="password">密码</label>
-              <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <div class="form-group">
-              <label for="confirm-password">确认密码</label>
-              <input type="password" class="form-control" id="confirm-password" name="confirm-password">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary">注册</button>
+  <div class="row justify-content-center">
+      <div class="col-md-6">
+          <form class="auth-form" method="post" action="">
+              {% csrf_token %}
+              <h2 style="color:black">Registration</h2>
+              {% if error_message != "" %}
+              <div class="alert alert-danger" role="alert">
+                  {{ error_message }}
+              </div>
+              {% endif %}
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name="name" required>
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+              <label for="confirm-password">Confirm Password</label>
+              <input type="password" class="form-control" id="confirm-password" name="confirm-password" required>
+              <label for="address">Address</label>
+              <input type="text" class="form-control" id="address" name="address" required>
+              <label for="zipcode">Postal Code</label>
+              <input type="text" class="form-control" id="zipcode" name="zipcode" required>
+              <input type="submit" class="btn btn-success" value="Registration">
           </form>
-        </div>
+          <div class="back-btn">
+              <a style="color:black" href="/">Back to Home</a>
+          </div>
       </div>
-    </div>
   </div>
 </div>
 

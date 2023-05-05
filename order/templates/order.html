@@ -3,7 +3,7 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-12 text-center">
-      <h2>我的订单</h2>
+      <h2>My Orders</h2>
     </div>
   </div>
   <div class="row mt-4">
@@ -12,38 +12,24 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">商品名称</th>
-            <th scope="col">单价</th>
-            <th scope="col">数量</th>
-            <th scope="col">小计</th>
-            <th scope="col">发货状态</th>
+            <th scope="col">Product name</th>
+            <th scope="col">Unit price</th>
+            <th scope="col">Number</th>
+            <th scope="col">Subtotal</th>
+            <th scope="col">Shipping Status</th>
           </tr>
         </thead>
         <tbody>
+          {% for order in orders %}
           <tr>
-            <th scope="row">1</th>
-            <td>商品1</td>
-            <td>￥100</td>
-            <td>1</td>
-            <td>￥100</td>
-            <td class="text-danger">未发货</td>
+            <th scope="row">{{ order.id }}</th>
+            <td>{{ order.product_name|truncatechars:40 }}</td>
+            <td>{{ order.product_price }}</td>
+            <td>{{ order.product_quantity }}</td>
+            <td>{{ order.total_price }}</td>
+            <td class="text-danger">Not shipped</td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>商品2</td>
-            <td>￥200</td>
-            <td>2</td>
-            <td>￥400</td>
-            <td class="text-danger">未发货</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>商品3</td>
-            <td>￥300</td>
-            <td>3</td>
-            <td>￥900</td>
-            <td class="text-danger">未发货</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
