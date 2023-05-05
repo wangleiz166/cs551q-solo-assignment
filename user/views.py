@@ -62,15 +62,15 @@ def signup(request):
 
         # Verify that the password is the same
         if password != confirm_password:
-            return render(request, 'signup.html', {'error_message': '两次输入的密码不一致，请重新输入。'})
+            return render(request, 'signup.html', {'error_message': 'The password entered twice does not match, please re-enter it.'})
 
         # Check if the email is registered
         if User.objects.filter(email=email).exists():
-            return render(request, 'signup.html', {'error_message': '此电子邮件已被注册，请尝试使用其他电子邮件。'})
+            return render(request, 'signup.html', {'error_message': 'This email is already registered, please try using another email.'})
         
         # Check if the name is registered
         if User.objects.filter(name=name).exists():
-            return render(request, 'signup.html', {'error_message': '此name已被注册，请尝试使用其他电子邮件。'})
+            return render(request, 'signup.html', {'error_message': 'This name is already registered, please try using another email.'})
 
         # Create new users and save them to the database
         hashed_password = make_password(password)

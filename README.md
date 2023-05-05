@@ -1,169 +1,178 @@
-## 1.用户表（user）：
+# shopping
 
-该表包含注册用户的信息，用户可以通过注册页面进行注册。
+## 1 - About us
 
-| 字段名           | 数据类型 | 描述         |
-| ---------------- | -------- | ------------ |
-| id               | INTEGER  | 用户ID，主键 |
-| username         | VARCHAR  | 用户名       |
-| password         | VARCHAR  | 密码         |
-| email            | VARCHAR  | 电子邮件地址 |
-| recipient_name   | VARCHAR  | 收货人姓名   |
-| province         | VARCHAR  | 省份         |
-| city             | VARCHAR  | 城市         |
-| district         | VARCHAR  | 区县         |
-| address          | VARCHAR  | 详细地址     |
-| phone            | VARCHAR  | 联系电话     |
+Our website application is an e-commerce platform that provides users with personalized and intelligent shopping experiences. The project was designed and developed with a modular approach, including product, product_csv, order, user, and product_admin modules. We selected the Amazon sales dataset from https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset and designed a database that includes product, review, user, shopping cart, and order tables using sqlite3 and managed it with Navicat. The website has a front-end and a back-end, and different user levels with corresponding permissions.
 
 
-```sql
-CREATE TABLE user (
-    id INTEGER PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    recipient_name VARCHAR(50) NOT NULL,
-    province VARCHAR(50) NOT NULL,
-    city VARCHAR(50) NOT NULL,
-    district VARCHAR(50) NOT NULL,
-    address VARCHAR(100) NOT NULL,
-    phone VARCHAR(20) NOT NULL
-);
+## 2 - Main features
+
+* View the summary of disaster data
+* Public navigation bar, About Us section, and search function
+* User registration, login, and logout
+* Home page with recommended products and links to product detail pages
+* Product list page with filters by category
+* Product detail page with product information, user reviews, and recommendations for similar products
+* Shopping cart page to add, delete, and checkout products
+* My Orders page for logged-in users to view their orders
+* Login and logout for administrators and different user levels with permissions
+* Order management, user management, and dashboard with graphs for administrators
+
+## 3 - Database overview
+
+![](https://github.com/wangleiz166/studyInAberdeen/blob/main/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230505205725.png?raw=true)
+
+## 4 - Installation
+
+### 4.1 If you are using Codio:
+
+#### 4.1.1 Create a virtual environment and activate it in the terminal of Codio
+``` shell
+    python3 -m venv .venv 
 ```
 
-
-## 2.订单表（order）：
-该表包含用户购买商品的订单信息，数据来自于用户下单购买商品时生成的订单。
-
-| 字段名            | 数据类型 | 描述               |
-| ----------------- | -------- | ------------------ |
-| id                | INTEGER  | 订单ID，主键       |
-| purchase_time     | DATETIME | 购买时间           |
-| buyer_name        | VARCHAR  | 购买者姓名         |
-| buyer_email       | VARCHAR  | 购买者电子邮件地址 |
-| buyer_address     | VARCHAR  | 购买者地址         |
-| buyer_phone       | VARCHAR  | 购买者电话号码     |
-| product_id        | INTEGER  | 商品ID，外键       |
-| product_name      | VARCHAR  | 商品名称           |
-| product_price     | DECIMAL  | 商品价格           |
-
-```sql
-CREATE TABLE order (
-    id INTEGER PRIMARY KEY,
-    purchase_time DATETIME NOT NULL,
-    buyer_name VARCHAR(50) NOT NULL,
-    buyer_email VARCHAR(50) NOT NULL,
-    buyer_address VARCHAR(100) NOT NULL,
-    buyer_phone VARCHAR(20) NOT NULL,
-    product_id INTEGER NOT NULL,
-    product_name VARCHAR(100) NOT NULL,
-    product_price DECIMAL(8, 2) NOT NULL
-);
+``` shell
+    source .venv/bin/activate 
 ```
 
+#### 4.1.2 Clone the repository or pull the code from Github
+``` shell
+    git clone git@github.com:wangleiz166/cs551q-solo-assignment.git
+```
+Or if you have cloned before
 
-## 3.评价表（review）：
-该表包含商品的评价信息，数据来自于用户对商品的评价和评论。
-
-| 字段名        | 数据类型 | 描述                   |
-| ------------- | -------- | ---------------------- |
-| id            | INTEGER  | 评价ID，主键           |
-| product_id    | INTEGER  | 商品ID，外键           |
-| user_id       | INTEGER  | 评价用户ID，外键       |
-| rating        | INTEGER  | 商品评分（0 到 5 星） |
-| content       | TEXT     | 评价内容               |
-| create_time   | DATETIME | 评价创建时间           |
-
-
-```sql
-CREATE TABLE review (
-    id INTEGER PRIMARY KEY,
-    product_id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
-    rating INTEGER NOT NULL,
-    content TEXT NOT NULL,
-    create_time DATETIME NOT NULL
-);
-
+``` shell
+    git pull origin main
 ```
 
-## 4.购物车表（cart）：
+#### 4.1.3 Changed the site details in **ALLOWED_HOSTS** of ```shop/setting.py```
 
-该表包含用户的购物车信息，数据来自于用户在网站上添加商品到购物车时生成的购物车记录。
+For example:
 
-| 字段名            | 数据类型 | 描述         |
-| ----------------- | -------- | ------------ |
-| id                | INTEGER  | 购物车ID     |
-| user_id           | INTEGER  | 用户ID，外键 |
-| product_id        | INTEGER  | 商品ID，外键 |
-| product_name      | VARCHAR  | 商品名称     |
-| product_price     | DECIMAL  | 商品价格     |
-| product_quantity  | INTEGER  | 商品数量     |
-
-```sql
-CREATE TABLE cart (
-    id INTEGER PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-    product_id INTEGER NOT NULL,
-    product_name VARCHAR(100) NOT NULL,
-    product_price DECIMAL(8, 2) NOT NULL,
-    product_quantity INTEGER NOT NULL
-);
+``` shell
+    ALLOWED_HOSTS = ['*']
+    CSRF_TRUSTED_ORIGINS = ['https://aprilpicnic-bronzefilm-8000.codio-box.uk','https://cs551q-solo-assignment.onrender.com']
 ```
 
-## 5.支付记录表（payment）：
-该表包含用户的支付信息，数据来自于用户对订单进行支付时生成的支付记录。
+#### 4.1.4 Install Django and Plotly in terminal
 
-| 字段名            | 数据类型 | 描述                     |
-| ----------------- | -------- | ------------------------ |
-| id                | INTEGER  | 支付ID，主键             |
-| user_id           | INTEGER  | 用户ID，外键             |
-| order_id          | INTEGER  | 订单ID，外键             |
-| payment_method    | VARCHAR  | 支付方式                 |
-| payment_amount    | DECIMAL  | 支付金额                 |
-| payment_time      | DATETIME | 支付时间                 |
+As for the Django installation
 
-```sql
-CREATE TABLE payment (
-    id INTEGER PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-    order_id INTEGER NOT NULL,
-    payment_method VARCHAR(50) NOT NULL,
-    payment_amount DECIMAL(8, 2) NOT NULL,
-    payment_time DATETIME NOT NULL
-);
+``` shell
+    pip install django
 ```
 
+As for the Plotly in terminal
 
-## 6.商品表（product）：
-该表包含所有商品的信息，数据来自于您提供的 book.csv 和 amazon.csv 数据文件，以及后续您在系统中添加的商品信息。
-
-| 字段名         | 数据类型 | 描述                       |
-| -------------- | -------- | -------------------------- |
-| id             | INTEGER  | 商品ID，主键               |
-| name           | VARCHAR  | 商品名称                   |
-| category       | VARCHAR  | 商品分类                   |
-| price          | DECIMAL  | 商品价格                   |
-| cover          | VARCHAR  | 封面图片链接               |
-| paper          | VARCHAR  | 纸质类型                   |
-| isbn           | VARCHAR  | ISBN 号                     |
-| date           | DATE     | 出版日期                   |
-| img_link       | VARCHAR  | 商品图片链接               |
-| product_link   | VARCHAR  | 商品链接                   |
-
-
-```sql
-CREATE TABLE product (
-    id INTEGER PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    category VARCHAR(50) NOT NULL,
-    price DECIMAL(8, 2) NOT NULL,
-    cover VARCHAR(50) NOT NULL,
-    paper VARCHAR(50) NOT NULL,
-    isbn VARCHAR(20) NOT NULL,
-    date DATE NOT NULL,
-    img_link VARCHAR(200) NOT NULL,
-    product_link VARCHAR(200) NOT NULL
-);
+``` shell
+    pip install plotly
 ```
 
+#### 4.1.5 Run the website application
+
+``` shell
+    python3 manage.py runserver 0.0.0.0:8000
+```
+
+P.S **8000** is decided by what did you input in 3.1.3
+
+### 4.2 If you are using a local editor, such as Visual Studio Code, or Mac Terminal:
+
+#### 4.2.1 Create a virtual environment and activate it in the terminal
+``` shell
+    python3 -m venv .venv 
+```
+
+``` shell
+    source .venv/bin/activate 
+```
+
+#### 4.2.2 Clone the repository or pull the code from Github
+``` shell
+    git clone git@github.com:wangleiz166/cs551q-solo-assignment.git
+```
+Or if you have cloned before
+
+``` shell
+    git pull origin main
+```
+
+#### 4.2.3 Changed the site details in **ALLOWED_HOSTS** of ```shop/setting.py```
+
+For example:
+
+``` shell
+    ALLOWED_HOSTS = ['*']
+    CSRF_TRUSTED_ORIGINS = ['https://aprilpicnic-bronzefilm-8000.codio-box.uk','https://cs551q-solo-assignment.onrender.com']
+```
+
+#### 4.2.4 Install Django and Plotly in terminal
+
+As for the Django installation
+
+``` shell
+    pip install django
+```
+
+As for the Plotly in terminal
+
+``` shell
+    pip install plotly
+```
+
+#### 4.2.5 Run the website application
+
+``` shell
+    python3 manage.py runserver
+```
+
+## 5 - Test
+To use Behave for testing in a Django project, you will need to follow these steps:
+
+1.Install Behave and Django-Behave-Runner::
+
+```
+pip install behave django-behave
+```
+
+2.In the `settings.py` file of your Django project, add `'django_behave.runner.djangotestrunner'` to your test runner, and INSTALLED_APPS: `
+
+```python
+INSTALLED_APPS = [
+     ...
+    'behave_django'.
+]
+
+TEST_RUNNER = 'behave_django.runner.BehaviorDrivenTestRunner'
+```
+3. Create a directory called `features` in parallel with your Django manage.py that will contain your feature files and step definitions.
+The directory structure is as follows:
+```
+    features/
+        steps/
+            __init__.py
+            myapp_steps.py
+        myapp.feature
+        environment.py
+```
+4. Write a feature file (`.feature`). Feature files are written in the Gherkin language and describe the expected behaviour of the application. For example, in `myapp.feature`:
+5. Write the corresponding step definitions. In the ``myapp/features/steps/myapp_steps.py`` file, you need to define the Python functions that match the steps described in the features file.
+6. Run the test in the root directory (the directory where manage.py is located).
+
+![](https://github.com/wangleiz166/studyInAberdeen/blob/main/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230505125939.png?raw=true)
+
+## 6 - Details of deploying the website application
+
+The website application has been deployed to Render, here is its URL: https://cs551q-solo-assignment.onrender.com.
+
+Build command:
+
+``` shell
+    pip install --upgrade pip && pip install -r requirements.txt
+```
+
+Start command:
+
+``` shell
+    gunicorn mysite.shop:application
+```
